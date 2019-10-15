@@ -8,20 +8,28 @@ import { RegistrationComponent } from './registration/registration.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { StartComponent } from './start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() { 
+        return localStorage.getItem('token');
+        } 
+     }
+   })
   ],
   providers: [],
   bootstrap: [AppComponent]
